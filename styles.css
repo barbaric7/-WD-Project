@@ -2,15 +2,10 @@ body {
     font-family: Arial, sans-serif;
     justify-content: center;
     margin: 0;
-    padding:250px;
     background-color: #F2E7FE;
-<<<<<<< Updated upstream
     align-items: flex-start;
     min-height: 100vh;
     background-image: url(media/bg.jpg);
-=======
-    background-image:url(bg1.jpg);
->>>>>>> Stashed changes
 }
 
 .home_container {
@@ -18,9 +13,8 @@ body {
     max-width: 500px;
     padding: 20px;
     background-color: #ffffff;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 16px;
-<<<<<<< Updated upstream
     margin: auto;
     margin-top: 100px;
 }
@@ -38,15 +32,6 @@ body {
 
 h1 {
     color: #F0CF65;
-=======
-    background-color: rgba(222, 184, 135, 0.84) ;
-    /* border:3px solid gold; */
-    /* opacity:90%; */
-}
-
-h1 {
-    color: white;
->>>>>>> Stashed changes
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -183,3 +168,4 @@ nav a:hover, nav a.active {
         grid-template-columns: 1fr;
     }
 }
+
