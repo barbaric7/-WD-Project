@@ -29,6 +29,46 @@ const wishes = {
         Marathi: ["नवीन वर्षाच्या हार्दिक शुभेच्छा!", "नवीन वर्ष आनंदमय जावो!"],
         Hindi: ["नव वर्ष की हार्दिक शुभकामनाएं!", "नया साल खुशियों से भरा हो!"]
     },
+    "Holi": {
+    "Marathi": [
+        "होळीच्या हार्दिक शुभेच्छा! 🎉🌈",
+        "तुमचं आयुष्य रंगीबेरंगी आणि आनंदाने भरलेलं असो! 🌈😊",
+        "रंग, प्रेम, आणि आनंदाने भरलेली होळी साजरी करा! 🥳💖",
+        "होळीचा उत्सव तुमच्या जीवनात नवे रंग घेऊन येवो! 🌟🎨",
+        "होळीच्या दिवशी तुमचे जीवन आनंदाने भरून जावो! 🌈✨",
+        "स्नेह आणि आनंदाने भरलेली होळी साजरी करा! 👫💐",
+        "होळीचा रंग तुमच्या आयुष्याला आनंदाने रंगवो! 🎨💝",
+        "सर्वांना रंग, प्रेम आणि उत्सवाच्या होळीच्या शुभेच्छा! 🌈🎉",
+        "होळीचा सण तुमच्या मनाला शांती आणि सुख मिळवून देतो! 🌸🙏",
+        "तुमच्या आयुष्यात रंग, हसू आणि प्रेम फुलू दे! 🌟💖"
+    ],
+    "English": [
+        "Wishing you a vibrant and joyous Holi! 🎨🎉",
+        "May your life be filled with the beautiful colors of Holi! 🌈😊",
+        "Celebrate this Holi with love, laughter, and colors! 💖😂🌈",
+        "Let the festival of colors brighten your life with happiness! ✨🎨",
+        "Wishing you and your family a colorful and safe Holi! 🌟🏡",
+        "May the colors of Holi bring peace and prosperity to your life! 🌸💰",
+        "Have a fun-filled Holi with your loved ones! 🥳💖",
+        "Let this Holi be the start of a new and colorful journey! 🌈🌟",
+        "Splash yourself in the colors of joy and love this Holi! 🎉💖",
+        "Wishing you endless happiness and vibrant colors this Holi! 🌟🌸"
+    ],
+    "Hindi": [
+        "होली की हार्दिक शुभकामनाएं! 🎉🌈",
+        "आपका जीवन खुशियों और रंगों से भर जाए! 🌟😊",
+        "होली का त्योहार आपके जीवन में नई खुशियां लाए! 🌈✨",
+        "आपके जीवन में रंग और खुशियां बरकरार रहें! 💖🌟",
+        "प्यार और रंगों के साथ होली मनाइए! 🌸💖",
+        "आपका जीवन सतरंगी और सुखद हो! 🌈😊",
+        "होली का हर रंग आपके जीवन में नई खुशियां लाए! 🎨🌟",
+        "होली की मिठास और रंगों से आपका जीवन महक उठे! 🌸💝",
+        "रंगों का त्योहार आपके जीवन को और रंगीन बना दे! 🌈✨",
+        "होली आपके जीवन में नई उमंग और ऊर्जा लाए! 🌟🎉"
+    ]
+}
+
+,
     "Sankrant": {
     "Marathi": [
         "मकर संक्रांतीच्या हार्दिक शुभेच्छा! 🌞🌾",
@@ -195,34 +235,76 @@ const wishes = {
     }
 };
 
-function loadWishes() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const language = urlParams.get("language");
-    const festival = urlParams.get("festival");
+    function loadWishes() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const language = urlParams.get("language");
+            const festival = urlParams.get("festival");
 
-    const wishesContainer = document.getElementById("wishesContainer");
-    wishesContainer.innerHTML = ""; 
+            const wishesContainer = document.getElementById("wishesContainer");
+            wishesContainer.innerHTML = ""; 
 
-    if (wishes[festival] && wishes[festival][language]) {
-        wishes[festival][language].forEach((wish) => {
-            const wishDiv = document.createElement("div");
-            wishDiv.className = "wish";
+            if (wishes[festival] && wishes[festival][language]) {
+                wishes[festival][language].forEach((wish) => {
+                    const wishDiv = document.createElement("div");
+                    wishDiv.className = "wish";
 
-            const wishText = document.createElement("p");
-            wishText.innerText = wish;
+                    const wishText = document.createElement("p");
+                    wishText.innerText = wish;
+
+                    const sendButton = document.createElement("button");
+                    sendButton.innerText = "Send";
+                    sendButton.onclick = () => sendWish(wish);
+
+                    // const navSend = document.querySelector("#send");
+                    // navSend.onclick = () => sendWish(wish);
+
+                    const customizeButton = document.createElement("button");
+                    customizeButton.innerText = "Customize";
+                    customizeButton.onclick = () => customizeWish(wishText);
+
+                    wishDiv.appendChild(wishText);
+                    wishDiv.appendChild(sendButton);
+                    wishDiv.appendChild(customizeButton);
+                    wishesContainer.appendChild(wishDiv);
+                });
+            } else {
+                wishesContainer.innerHTML = "<p>No wishes found for the selected festival and language.</p>";
+            }
+    }
+
+    function customizeWish(wishTextElement) {
+            const originalText = wishTextElement.innerText;
+            const inputField = document.createElement("input");
+            inputField.type = "text";
+            inputField.value = originalText;
+            wishTextElement.innerHTML = '';
+            wishTextElement.appendChild(inputField);
+
+            const saveButton = document.createElement("button");
+            saveButton.innerText = "Save";
+            saveButton.onclick = () => saveCustomizedWish(inputField, originalText, wishTextElement);
+            wishTextElement.appendChild(saveButton);
+    }
+
+    function saveCustomizedWish(inputField, originalText, wishTextElement) {
+            const customizedText = inputField.value;
+
+            if (customizedText.trim() === "") {
+                alert("Wish cannot be empty.");
+                inputField.value = originalText;
+                return;
+            }
+
+            wishTextElement.innerHTML = customizedText;
 
             const sendButton = document.createElement("button");
             sendButton.innerText = "Send";
-            sendButton.onclick = () => sendWish(wish);
+            sendButton.onclick = () => sendWish(customizedText);
+            wishTextElement.appendChild(sendButton);
 
-            wishDiv.appendChild(wishText);
-            wishDiv.appendChild(sendButton);
-            wishesContainer.appendChild(wishDiv);
-        });
-    } else {
-        wishesContainer.innerHTML = "<p>No wishes found for the selected festival and language.</p>";
+            const saveButton = wishTextElement.querySelector("button");
+            saveButton.remove();
     }
-}
 
 function sendWish(wishText) {
     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(wishText)}`;
