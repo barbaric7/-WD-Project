@@ -36,7 +36,7 @@ h1 {
 }
 
 select, input, button {
-    width: 100%;
+    width: 348px;
     padding: 10px;
     margin: 10px 0;
     font-size: 16px;
@@ -161,7 +161,6 @@ nav a:hover, nav a.active {
 .gallery-item img:hover {
     transform: scale(1.05);
 }
-
 
 @media (max-width: 768px) {
     .collage-grid {

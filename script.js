@@ -311,25 +311,37 @@ function sendWish(wishText) {
     window.open(whatsappLink, "_blank");
 }
 
-// Assuming this is part of your existing JavaScript file
+document.addEventListener("DOMContentLoaded", function() {
+    const imageWishesButton = document.getElementById("imageWishesButton");
+    
+    imageWishesButton.addEventListener("click", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const festival = urlParams.get("festival");
 
-// Function to initialize event listeners for sending images
+        if (festival) {
+            window.location.href = `${festival}_image.html`;
+        } else {
+            alert("Please select a festival first.");
+        }
+    });
+
+    loadWishes();
+});
+
 function initializeWhatsAppButtons() {
     document.querySelectorAll(".sendToWhatsApp").forEach(button => {
         button.addEventListener("click", function() {
-            const imageUrl = this.previousElementSibling.src; // Get the image source
+            const imageUrl = this.previousElementSibling.src; 
             const whatsappUrl = `https://api.whatsapp.com/send?text=Check out this image: ${imageUrl}`;
-            window.open(whatsappUrl, '_blank'); // Open WhatsApp sharing link
+            window.open(whatsappUrl, '_blank');
         });
     });
 }
 
-// Call the function to set up event listeners once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
     initializeWhatsAppButtons();
 });
 
-// Other existing functions can go here...
 
 
 window.onload = loadWishes;
